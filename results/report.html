@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LUX Lattice — Reciprocal-Space Security Analysis</title>
+<style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #0a0a0a; color: #e0e0e0; }
+    h1 { color: #ff5722; border-bottom: 2px solid #ff5722; padding-bottom: 10px; }
+    h2 { color: #2196f3; margin-top: 40px; }
+    h3 { color: #ccc; }
+    .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 30px; border-radius: 8px; margin-bottom: 30px; }
+    .header h1 { margin: 0; border: none; }
+    .header p { color: #888; margin: 5px 0; }
+    .finding { padding: 15px; margin: 10px 0; border-radius: 6px; border-left: 4px solid #666; background: #1a1a1a; }
+    .finding.critical { border-left-color: #f44336; background: #1a0a0a; }
+    .finding.warning { border-left-color: #ff9800; background: #1a1500; }
+    .finding.good { border-left-color: #4caf50; background: #0a1a0a; }
+    .finding.info { border-left-color: #2196f3; }
+    .finding pre { background: #111; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; color: #aaa; }
+    .chart { margin: 20px 0; text-align: center; }
+    .chart img { max-width: 100%; border-radius: 6px; border: 1px solid #333; }
+    .go-findings { background: #111; padding: 15px; border-radius: 6px; }
+    .go-findings li { margin: 8px 0; }
+    .methodology { background: #111; padding: 20px; border-radius: 6px; margin: 20px 0; }
+    .methodology p { color: #999; line-height: 1.6; }
+    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>LUX Lattice — Reciprocal-Space Security Analysis</h1>
+    <p>Dragonfire Research | 2026-03-21T10:38:16Z</p>
+    <p>Ring Degree: 1024 | Samples: 10000</p>
+</div>
+
+<div class="methodology">
+    <h2>Methodology: Reciprocal-Space Analysis</h2>
+    <p>Lattice-based cryptographic security depends on the hardness of finding short vectors in
+    high-dimensional lattices. The noise added during encryption (from a Gaussian distribution)
+    is what makes the lattice problem hard. However, when this noise is transformed into the
+    Number Theoretic Transform (NTT) domain — the discrete analogue of reciprocal space in
+    solid-state physics — structural anomalies may become visible that are hidden in direct space.</p>
+
+    <p>This analysis examines the LUX lattice implementation by:</p>
+    <p>1. Capturing raw Gaussian noise samples from the sampler (direct space)<br>
+    2. Applying NTT transformation to move into reciprocal space<br>
+    3. Comparing statistical properties across both domains<br>
+    4. Computing power spectral density to detect hidden periodicity<br>
+    5. Measuring autocorrelation to identify exploitable structure<br>
+    6. Timing crypto operations to detect side-channel leakage</p>
+
+    <p>The physical analogy: just as phonon dispersion reveals defects in a crystal lattice that
+    are invisible to direct inspection, spectral analysis of cryptographic noise can reveal
+    implementation weaknesses that are invisible to standard statistical tests.</p>
+</div>
+
+<h2>Go Harness Findings</h2>
+<div class="go-findings">
+    <ul><li>TIMING: Gaussian_Sample_Real has CV=0.342 — non-constant-time risk</li>
+<li>TIMING: NTT_Forward_Real has CV=0.140 — non-constant-time risk</li>
+<li>TIMING: INTT_Backward_Real has CV=0.108 — non-constant-time risk</li>
+<li>SPECTRAL: reciprocal_space has kurtosis=-1.1925 — non-Gaussian tails</li>
+<li>RECIPROCAL: Variance ratio (direct/reciprocal) = 0.00 — significant energy redistribution in frequency domain</li>
+</ul>
+</div>
+
+<h2>Spectral Analysis Results</h2>
+<div class="chart"><h3>Distribution</h3><img src="charts/distribution_comparison.png" /></div>
+<div class="chart"><h3>Psd</h3><img src="charts/psd_analysis.png" /></div>
+<div class="chart"><h3>Autocorrelation</h3><img src="charts/autocorrelation.png" /></div>
+
+
+<h2>Detailed Findings</h2>
+
+        <div class="finding info">
+            <h3>Direct Space Distribution</h3>
+            <pre>{
+  "name": "Direct Space Distribution",
+  "n": 10000,
+  "mean": -0.006,
+  "std": 3.2270983870963708,
+  "variance": 10.414163999999998,
+  "skewness": 0.07002761103342017,
+  "kurtosis": 0.07464858285995923,
+  "min": -12.0,
+  "max": 12.0,
+  "normality_test": "D'Agostino-Pearson",
+  "normality_stat": 10.438236109312696,
+  "normality_p": 0.005412100198788883,
+  "is_gaussian": "False"
+}</pre>
+        </div>
+        
+        <div class="finding info">
+            <h3>Direct Space Spectral</h3>
+            <pre>{
+  "name": "Direct Space Spectral",
+  "psd_mean": 20.605750770855902,
+  "psd_max": 29.02559861240613,
+  "psd_peak_freq": 0.03515625,
+  "spectral_flatness": 0.9862111852975296,
+  "is_white_noise": "True",
+  "max_autocorrelation_lag1_10": 0.02125353750910795,
+  "has_structure": false
+}</pre>
+        </div>
+        
+        <div class="finding info">
+            <h3>Reciprocal Space Distribution</h3>
+            <pre>{
+  "name": "Reciprocal Space Distribution",
+  "n": 1024,
+  "mean": 21990232554241.01,
+  "std": 645308229335358.8,
+  "variance": 4.16422710847936e+29,
+  "skewness": -0.024240938988069657,
+  "kurtosis": -1.1925365596921327,
+  "min": -1125631967668576.0,
+  "max": 1124983497145603.0,
+  "normality_test": "Shapiro-Wilk",
+  "normality_stat": 0.9550780996000607,
+  "normality_p": 3.631961308521301e-17,
+  "is_gaussian": "False"
+}</pre>
+        </div>
+        
+        <div class="finding info">
+            <h3>Reciprocal Space Spectral</h3>
+            <pre>{
+  "name": "Reciprocal Space Spectral",
+  "psd_mean": 8.357475151673109e+29,
+  "psd_max": 1.709649625264889e+30,
+  "psd_peak_freq": 0.48828125,
+  "spectral_flatness": 0.9213490085045406,
+  "is_white_noise": "True",
+  "max_autocorrelation_lag1_10": 0.07065912131571873,
+  "has_structure": true
+}</pre>
+        </div>
+        
+        <div class="finding warning">
+            <h3>Cross-Domain Comparison</h3>
+            <pre>{
+  "name": "Cross-Domain Comparison",
+  "direct_variance": 10.414163999999998,
+  "reciprocal_variance": 4.16422710847936e+29,
+  "variance_ratio": 2.5008636005452908e-29,
+  "verdict": "WARNING: Significant energy redistribution between domains"
+}</pre>
+        </div>
+        
+
+<div class="footer">
+    <p>Generated by Dragonfire Research Rig v0.1 | LUX Lattice Reciprocal-Space Analysis</p>
+    <p>This report analyses placeholder data unless the Go harness has been integrated with the actual LUX lattice library.</p>
+</div>
+
+</body>
+</html>

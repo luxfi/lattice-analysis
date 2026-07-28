@@ -1,0 +1,9 @@
+node_modules/
+dist/
+target/
+.next/
+
+# compiled analysis binaries — build output
+/lattice_test
+/round2
+/kurtosis_sweep

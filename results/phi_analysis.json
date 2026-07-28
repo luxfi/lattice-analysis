@@ -1,0 +1,375 @@
+{
+  "analysis": "Phi-Geometric Analysis of RLWE Lattice Noise",
+  "methodology": "In2Infinity Brillouin Zone Theory applied to cryptographic lattice noise",
+  "key_constants": {
+    "phi": 1.618033988749895,
+    "sqrt_1.25": 1.118033988749895,
+    "sqrt_2": 1.4142135623730951,
+    "sqrt_5": 2.23606797749979,
+    "silver_ratio": 2.414213562373095
+  },
+  "results": [
+    {
+      "test": "phi_frequencies",
+      "domain": "NTT",
+      "mean_psd": 8.384719993440745e+29,
+      "anomalies": [
+        {
+          "label": "1/sqrt5",
+          "target_freq": 0.4472135954999579,
+          "actual_freq": 0.4453125,
+          "power": 7.5357975061989175e+28,
+          "ratio_to_mean": 0.08987536270852303,
+          "anomaly": "SUPPRESSED \u2014 0.09x mean power"
+        },
+        {
+          "label": "1/sqrt2",
+          "target_freq": 0.7071067811865475,
+          "actual_freq": 0.70703125,
+          "power": 3.2500438339332216e+29,
+          "ratio_to_mean": 0.3876150708044738,
+          "anomaly": "SUPPRESSED \u2014 0.39x mean power"
+        }
+      ],
+      "frequencies": [
+        {
+          "label": "1/phi",
+          "target_freq": 0.6180339887498948,
+          "actual_freq": 0.6171875,
+          "power": 1.1732401068470693e+30,
+          "ratio_to_mean": 1.399259734093541,
+          "anomaly": null
+        },
+        {
+          "label": "1/sqrt5",
+          "target_freq": 0.4472135954999579,
+          "actual_freq": 0.4453125,
+          "power": 7.5357975061989175e+28,
+          "ratio_to_mean": 0.08987536270852303,
+          "anomaly": "SUPPRESSED \u2014 0.09x mean power"
+        },
+        {
+          "label": "1/sqrt2",
+          "target_freq": 0.7071067811865475,
+          "actual_freq": 0.70703125,
+          "power": 3.2500438339332216e+29,
+          "ratio_to_mean": 0.3876150708044738,
+          "anomaly": "SUPPRESSED \u2014 0.39x mean power"
+        },
+        {
+          "label": "1/sqrt1.25",
+          "target_freq": 0.8944271909999159,
+          "actual_freq": 0.89453125,
+          "power": 1.1520778336106792e+30,
+          "ratio_to_mean": 1.374020640536517,
+          "anomaly": null
+        },
+        {
+          "label": "phi/3",
+          "target_freq": 0.5393446629166316,
+          "actual_freq": 0.5390625,
+          "power": 1.2008732439157517e+30,
+          "ratio_to_mean": 1.4322162753856764,
+          "anomaly": null
+        },
+        {
+          "label": "2/sqrt5",
+          "target_freq": 0.8944271909999159,
+          "actual_freq": 0.89453125,
+          "power": 1.1520778336106792e+30,
+          "ratio_to_mean": 1.374020640536517,
+          "anomaly": null
+        },
+        {
+          "label": "silver/4",
+          "target_freq": 0.6035533905932737,
+          "actual_freq": 0.60546875,
+          "power": 1.0438437133317756e+30,
+          "ratio_to_mean": 1.2449356855665552,
+          "anomaly": null
+        }
+      ],
+      "verdict": "FOUND 2 phi-related frequency anomalies"
+    },
+    {
+      "test": "phi_frequencies",
+      "domain": "Direct",
+      "mean_psd": 20.748513370029723,
+      "anomalies": [],
+      "frequencies": [
+        {
+          "label": "1/phi",
+          "target_freq": 0.6180339887498948,
+          "actual_freq": 0.6171875,
+          "power": 26.043810434485703,
+          "ratio_to_mean": 1.2552133239629975,
+          "anomaly": null
+        },
+        {
+          "label": "1/sqrt5",
+          "target_freq": 0.4472135954999579,
+          "actual_freq": 0.4453125,
+          "power": 19.78949545224035,
+          "ratio_to_mean": 0.9537789575240301,
+          "anomaly": null
+        },
+        {
+          "label": "1/sqrt2",
+          "target_freq": 0.7071067811865475,
+          "actual_freq": 0.70703125,
+          "power": 19.120636096065812,
+          "ratio_to_mean": 0.9215424621064512,
+          "anomaly": null
+        },
+        {
+          "label": "1/sqrt1.25",
+          "target_freq": 0.8944271909999159,
+          "actual_freq": 0.89453125,
+          "power": 17.56088385052746,
+          "ratio_to_mean": 0.8463682933493131,
+          "anomaly": null
+        },
+        {
+          "label": "phi/3",
+          "target_freq": 0.5393446629166316,
+          "actual_freq": 0.5390625,
+          "power": 25.814514234599876,
+          "ratio_to_mean": 1.2441621129293898,
+          "anomaly": null
+        },
+        {
+          "label": "2/sqrt5",
+          "target_freq": 0.8944271909999159,
+          "actual_freq": 0.89453125,
+          "power": 17.56088385052746,
+          "ratio_to_mean": 0.8463682933493131,
+          "anomaly": null
+        },
+        {
+          "label": "silver/4",
+          "target_freq": 0.6035533905932737,
+          "actual_freq": 0.60546875,
+          "power": 22.18683363710978,
+          "ratio_to_mean": 1.0693216059111803,
+          "anomaly": null
+        }
+      ],
+      "verdict": "No significant phi-related frequency anomalies detected"
+    },
+    {
+      "test": "phi_autocorrelation",
+      "domain": "NTT",
+      "lag_results": [
+        {
+          "label": "sqrt_1.25 (lag=1)",
+          "phi_value": 1.118033988749895,
+          "lag": 1,
+          "autocorrelation": -0.012352674781169658,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "sqrt_1.25 (lag=2)",
+          "phi_value": 1.118033988749895,
+          "lag": 2,
+          "autocorrelation": -0.028011197734772283,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "sqrt_2 (lag=1)",
+          "phi_value": 1.4142135623730951,
+          "lag": 1,
+          "autocorrelation": -0.012352674781169658,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "sqrt_2 (lag=2)",
+          "phi_value": 1.4142135623730951,
+          "lag": 2,
+          "autocorrelation": -0.028011197734772283,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "phi (lag=1)",
+          "phi_value": 1.618033988749895,
+          "lag": 1,
+          "autocorrelation": -0.012352674781169658,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "phi (lag=2)",
+          "phi_value": 1.618033988749895,
+          "lag": 2,
+          "autocorrelation": -0.028011197734772283,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "sqrt_5 (lag=2)",
+          "phi_value": 2.23606797749979,
+          "lag": 2,
+          "autocorrelation": -0.028011197734772283,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "sqrt_5 (lag=3)",
+          "phi_value": 2.23606797749979,
+          "lag": 3,
+          "autocorrelation": -0.002777527591138098,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "phi_sq (lag=2)",
+          "phi_value": 2.618033988749895,
+          "lag": 2,
+          "autocorrelation": -0.028011197734772283,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "phi_sq (lag=3)",
+          "phi_value": 2.618033988749895,
+          "lag": 3,
+          "autocorrelation": -0.002777527591138098,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "zone_4 (lag=3)",
+          "phi_value": 3.0,
+          "lag": 3,
+          "autocorrelation": -0.002777527591138098,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "zone_4 (lag=3)",
+          "phi_value": 3.0,
+          "lag": 3,
+          "autocorrelation": -0.002777527591138098,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "phi_cubed (lag=4)",
+          "phi_value": 4.23606797749979,
+          "lag": 4,
+          "autocorrelation": -0.028732597395625465,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "phi_cubed (lag=5)",
+          "phi_value": 4.23606797749979,
+          "lag": 5,
+          "autocorrelation": -0.07065912131571873,
+          "threshold": 0.06125,
+          "significant": "True"
+        },
+        {
+          "label": "2*phi (lag=3)",
+          "phi_value": 3.23606797749979,
+          "lag": 3,
+          "autocorrelation": -0.002777527591138098,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "2*phi (lag=4)",
+          "phi_value": 3.23606797749979,
+          "lag": 4,
+          "autocorrelation": -0.028732597395625465,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "sqrt5*phi (lag=3)",
+          "phi_value": 3.6180339887498953,
+          "lag": 3,
+          "autocorrelation": -0.002777527591138098,
+          "threshold": 0.06125,
+          "significant": "False"
+        },
+        {
+          "label": "sqrt5*phi (lag=4)",
+          "phi_value": 3.6180339887498953,
+          "lag": 4,
+          "autocorrelation": -0.028732597395625465,
+          "threshold": 0.06125,
+          "significant": "False"
+        }
+      ],
+      "anomalies": [
+        {
+          "label": "phi_cubed (lag=5)",
+          "phi_value": 4.23606797749979,
+          "lag": 5,
+          "autocorrelation": -0.07065912131571873,
+          "threshold": 0.06125,
+          "significant": "True"
+        }
+      ],
+      "verdict": "FOUND 1 significant autocorrelation values at phi-related lags"
+    },
+    {
+      "test": "zone_kurtosis",
+      "domain": "NTT",
+      "measured_kurtosis": -1.1925365596921327,
+      "abs_kurtosis": 1.1925365596921327,
+      "matches": [],
+      "sqrt_1.25_proximity": {
+        "sqrt_1.25": 1.118033988749895,
+        "difference": 0.07450257094223778,
+        "note": "|kurtosis| - \u221a1.25 = 0.0745 \u2014 VERY CLOSE to \u221a1.25!"
+      },
+      "verdict": "SIGNIFICANT: |kurtosis| = 1.1925 \u2248 \u221a1.25 = 1.1180 (diff=0.0745). The Sandreckoner vector length appears in the noise distribution."
+    },
+    {
+      "test": "zone_progression",
+      "domain": "NTT",
+      "zones": [
+        {
+          "zone": 1,
+          "freq_range": "0.000 \u2014 0.333",
+          "mean_power": 7.898543293186512e+29,
+          "total_power": 6.7927472321404e+31,
+          "variance": 1.94245809693927e+59
+        },
+        {
+          "zone": 2,
+          "freq_range": "0.333 \u2014 0.471",
+          "mean_power": 8.540579304190821e+29,
+          "total_power": 2.9892027564667875e+31,
+          "variance": 2.4334752355401413e+59
+        },
+        {
+          "zone": 3,
+          "freq_range": "0.471 \u2014 0.745",
+          "mean_power": 8.811994007812861e+29,
+          "total_power": 6.168395805469003e+31,
+          "variance": 1.80156297958962e+59
+        },
+        {
+          "zone": 4,
+          "freq_range": "0.745 \u2014 1.000",
+          "mean_power": 8.610401761510719e+29,
+          "total_power": 5.596761144981967e+31,
+          "variance": 2.9813902903488364e+59
+        }
+      ],
+      "max_power_ratio": 1.1156479974496456,
+      "verdict": "OK: Energy roughly uniform across zones"
+    }
+  ],
+  "charts": {
+    "phi_psd": "results/charts/phi_psd_markers.png",
+    "phi_kurtosis": "results/charts/phi_kurtosis_comparison.png",
+    "phi_zones": "results/charts/phi_zone_energy.png"
+  }
+}

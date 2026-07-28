@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-03-21T10:38:16Z",
+  "ring_degree": 1024,
+  "num_samples": 10000,
+  "sigma": 3.2,
+  "bound": 19.2,
+  "moduli": [
+    2251799813554177
+  ],
+  "timing_analysis": [
+    {
+      "operation": "Gaussian_Sample_Real",
+      "trials": 5000,
+      "mean_ns": 39114.3722,
+      "stddev_ns": 13373.36179060698,
+      "min_ns": 31058,
+      "max_ns": 462261,
+      "coefficient_of_variation": 0.3419040377850416,
+      "verdict": "CRITICAL: Very high timing variance (CV=0.342) — likely non-constant-time"
+    },
+    {
+      "operation": "NTT_Forward_Real",
+      "trials": 5000,
+      "mean_ns": 6685.824,
+      "stddev_ns": 934.6323663473238,
+      "min_ns": 5690,
+      "max_ns": 30027,
+      "coefficient_of_variation": 0.1397931453695646,
+      "verdict": "WARNING: High timing variance (CV=0.140) — potential side-channel"
+    },
+    {
+      "operation": "INTT_Backward_Real",
+      "trials": 5000,
+      "mean_ns": 5054.6716,
+      "stddev_ns": 545.1353018778397,
+      "min_ns": 4708,
+      "max_ns": 23445,
+      "coefficient_of_variation": 0.10784781782417668,
+      "verdict": "WARNING: High timing variance (CV=0.108) — potential side-channel"
+    }
+  ],
+  "spectral_analysis": [
+    {
+      "domain": "direct_space",
+      "mean": -0.006,
+      "variance": 10.414163999999582,
+      "skewness": 0.07002761103342635,
+      "kurtosis": 0.07464858286017728,
+      "verdict": "OK"
+    },
+    {
+      "domain": "reciprocal_space",
+      "mean": 21990232554241.09,
+      "variance": 4.164227108479361e+29,
+      "skewness": -0.024240938988070216,
+      "kurtosis": -1.1925365596921351,
+      "verdict": "WARNING: Non-Gaussian kurtosis (-1.1925) — heavy/light tails"
+    }
+  ],
+  "findings": [
+    "TIMING: Gaussian_Sample_Real has CV=0.342 — non-constant-time risk",
+    "TIMING: NTT_Forward_Real has CV=0.140 — non-constant-time risk",
+    "TIMING: INTT_Backward_Real has CV=0.108 — non-constant-time risk",
+    "SPECTRAL: reciprocal_space has kurtosis=-1.1925 — non-Gaussian tails",
+    "RECIPROCAL: Variance ratio (direct/reciprocal) = 0.00 — significant energy redistribution in frequency domain"
+  ]
+}
